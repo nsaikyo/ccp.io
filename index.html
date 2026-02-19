@@ -692,14 +692,14 @@
     </main>
 
     <!-- --- TICKER --- -->
-    <div id="ticker-container" class="fixed bottom-0 left-0 w-full z-40 h-[40px] bg-white/95 backdrop-blur-md border-t border-neutral-200 pb-[env(safe-area-inset-bottom)] box-content">
-        <div class="tradingview-widget-container h-full w-full opacity-90 hover:opacity-100 transition-opacity" id="tv-widget-container">
-            <div class="tradingview-widget-container__widget h-full w-full"></div>
+    <div id="ticker-container" class="fixed bottom-0 left-0 w-full z-40 bg-white/95 backdrop-blur-md border-t border-neutral-200 pb-[env(safe-area-inset-bottom)]">
+        <div class="tradingview-widget-container w-full opacity-90 hover:opacity-100 transition-opacity overflow-hidden" id="tv-widget-container">
+            <div class="tradingview-widget-container__widget w-full"></div>
         </div>
     </div>
 
     <!-- --- FOOTER --- -->
-    <footer class="bg-white py-24 border-t border-neutral-100 text-neutral-400 text-[10px] mb-[40px] relative z-10">
+    <footer class="bg-white py-24 border-t border-neutral-100 text-neutral-400 text-[10px] mb-[48px] relative z-10">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-16">
             <div class="col-span-1 md:col-span-2">
                 <h4 class="text-neutral-900 text-sm font-serif mb-8 tracking-widest">Credit Capital Partners</h4>
@@ -973,7 +973,7 @@
                     "showSymbolLogo": false,
                     "colorTheme": "light",
                     "isTransparent": true,
-                    "displayMode": "adaptive",
+                    "displayMode": "regular",
                     "locale": "ja"
                 });
                 container.appendChild(script);
