@@ -58,6 +58,18 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Hero Grid Pan Animation */
+        @keyframes pan-bg {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 4rem 4rem; }
+        }
+        .animate-pan-bg {
+            animation: pan-bg 30s linear infinite;
+        }
+
+        /* Tabular Nums for Shuffle */
+        .tabular-nums { font-variant-numeric: tabular-nums; }
     </style>
 </head>
 <body class="bg-[#F8F8F8] text-neutral-900 font-sans selection:bg-neutral-900 selection:text-white overflow-x-hidden relative">
@@ -75,7 +87,7 @@
             </div>
             
             <div class="text-center overflow-hidden">
-                <p class="text-white font-serif tracking-[0.3em] text-[10px] uppercase whitespace-nowrap">
+                <p class="text-white font-serif tracking-[0.3em] text-[10px] whitespace-nowrap">
                     Credit Capital Partners
                 </p>
                 <div id="intro-line" class="h-[1px] w-0 bg-white/50 mt-4 mx-auto transition-all duration-1000 delay-500"></div>
@@ -88,58 +100,69 @@
          style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);">
     </div>
 
-    <!-- --- NAVIGATION --- -->
-    <nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500 bg-white/90 backdrop-blur-xl border-b border-neutral-200/50 py-4">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative gap-8">
-            <!-- Logo Section -->
-            <div onclick="navigateTo('home')" class="flex items-center gap-3 md:gap-4 group cursor-pointer z-50 shrink-0">
-                <!-- Star Logo (Black) -->
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-900" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px; flex-shrink: 0;">
-                    <path d="M50 0C50 0 55 35 95 50C55 65 50 100 50 100C50 100 45 65 5 50C45 35 50 0 50 0Z" fill="currentColor" />
-                    <circle cx="50" cy="50" r="5" fill="currentColor" class="opacity-50" />
-                </svg>
-                <span class="hidden sm:inline text-[10px] md:text-xs tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold whitespace-nowrap">
-                    Credit Capital Partners
-                </span>
-                <span class="sm:hidden text-[10px] tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold whitespace-nowrap">
-                    Credit Capital
-                </span>
+    <!-- --- HEADER (NAVIGATION & TICKER COMBINED) --- -->
+    <header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-500 bg-white/90 backdrop-blur-xl border-b border-transparent">
+        
+        <!-- Ticker Tape (Moved to top) -->
+        <div id="ticker-container" class="h-[40px] w-full border-b border-neutral-200/50 bg-white/50 relative overflow-hidden">
+            <div class="tradingview-widget-container w-full h-full opacity-90 hover:opacity-100 transition-opacity" id="tv-widget-container">
+                <div class="tradingview-widget-container__widget w-full h-full"></div>
             </div>
+        </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden xl:flex items-center gap-8 shrink-0">
-                <a href="#philosophy" onclick="navLinkClick(event, 'home', 'philosophy')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Philosophy
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#methodology" onclick="navLinkClick(event, 'home', 'methodology')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Methodology
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#architecture" onclick="navLinkClick(event, 'home', 'architecture')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Architecture
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#infrastructure" onclick="navLinkClick(event, 'home', 'infrastructure')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Infrastructure
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#membership" onclick="navLinkClick(event, 'home', 'membership')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Membership
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <button onclick="toggleModal(true)" class="ml-4 px-6 py-2 border-[0.5px] border-neutral-300 text-neutral-900 text-[9px] uppercase tracking-[0.25em] hover:bg-neutral-900 hover:text-white transition-all duration-500 hover:shadow-lg whitespace-nowrap">
-                    Client Login
+        <!-- Navigation -->
+        <nav id="main-nav" class="py-4">
+            <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative gap-8">
+                <!-- Logo Section -->
+                <div onclick="navigateTo('home')" class="flex items-center gap-3 md:gap-4 group cursor-pointer z-50 shrink-0">
+                    <!-- Star Logo (Black) -->
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-900 transition-transform duration-500 group-hover:scale-110" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px; flex-shrink: 0;">
+                        <path d="M50 0C50 0 55 35 95 50C55 65 50 100 50 100C50 100 45 65 5 50C45 35 50 0 50 0Z" fill="currentColor" />
+                        <circle cx="50" cy="50" r="5" fill="currentColor" class="opacity-50" />
+                    </svg>
+                    <span class="hidden sm:inline text-[10px] md:text-[13px] tracking-[0.2em] font-serif text-neutral-900 font-bold whitespace-nowrap">
+                        Credit Capital Partners
+                    </span>
+                    <span class="sm:hidden text-[10px] tracking-[0.2em] font-serif text-neutral-900 font-bold whitespace-nowrap">
+                        Credit Capital
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden xl:flex items-center gap-8 shrink-0">
+                    <a href="#philosophy" onclick="navLinkClick(event, 'home', 'philosophy')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Philosophy
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#methodology" onclick="navLinkClick(event, 'home', 'methodology')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Methodology
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#architecture" onclick="navLinkClick(event, 'home', 'architecture')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Architecture
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#infrastructure" onclick="navLinkClick(event, 'home', 'infrastructure')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Infrastructure
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#membership" onclick="navLinkClick(event, 'home', 'membership')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Membership
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <button onclick="toggleModal(true)" class="ml-4 px-6 py-2 border-[0.5px] border-neutral-300 text-neutral-900 text-[9px] uppercase tracking-[0.25em] hover:bg-neutral-900 hover:text-white transition-all duration-500 hover:shadow-lg whitespace-nowrap">
+                        Client Login
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="xl:hidden text-neutral-900 p-2 shrink-0" onclick="toggleMenu()" aria-label="Toggle Menu">
+                    <i data-lucide="menu" id="menu-icon-open"></i>
+                    <i data-lucide="x" id="menu-icon-close" class="hidden"></i>
                 </button>
             </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="xl:hidden text-neutral-900 z-50 p-2 shrink-0" onclick="toggleMenu()" aria-label="Toggle Menu">
-                <i data-lucide="menu" id="menu-icon-open"></i>
-                <i data-lucide="x" id="menu-icon-close" class="hidden"></i>
-            </button>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- MOBILE MENU OVERLAY -->
     <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-[#FAFAFA] flex flex-col transition-all duration-500 ease-[0.22,1,0.36,1] -translate-y-full opacity-0 invisible">
@@ -149,7 +172,7 @@
                     <path d="M50 0C50 0 55 35 95 50C55 65 50 100 50 100C50 100 45 65 5 50C45 35 50 0 50 0Z" fill="currentColor" />
                     <circle cx="50" cy="50" r="5" fill="currentColor" class="opacity-50" />
                 </svg>
-                <span class="text-[10px] tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold">Credit Capital</span>
+                <span class="text-[10px] tracking-[0.2em] font-serif text-neutral-900 font-bold">Credit Capital</span>
             </div>
             <button onclick="toggleMenu()" class="p-2 text-neutral-900">
                 <i data-lucide="x"></i>
@@ -193,67 +216,68 @@
     <main id="page-home" class="block">
         
         <!-- --- HERO SECTION --- -->
-        <section class="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden pb-20 pt-24">
-            <!-- BACKGROUND -->
-            <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 opacity-[0.12] mix-blend-multiply pointer-events-none">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Structure" class="w-full h-full object-cover grayscale contrast-125" />
+        <section class="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden pb-20 pt-32 bg-[#F8F8F8]">
+            
+            <!-- BACKGROUND: Minimalist & Dynamic -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <!-- Architectural Backdrop (Highly subtle) -->
+                <div class="absolute inset-0 opacity-[0.08] mix-blend-multiply pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Structure" class="w-full h-full object-cover grayscale contrast-150" />
                     <div class="absolute inset-0 bg-gradient-to-t from-[#F8F8F8] via-transparent to-[#F8F8F8]"></div>
                     <div class="absolute inset-0 bg-gradient-to-r from-[#F8F8F8] via-transparent to-[#F8F8F8]"></div>
                 </div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-gradient-to-tr from-blue-50/30 via-purple-50/20 to-amber-50/30 rounded-full blur-[100px] animate-pulse opacity-60"></div>
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+                
+                <!-- Dynamic Panning Grid -->
+                <div class="absolute inset-[calc(-50%)] bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_40%_40%_at_50%_50%,#000_20%,transparent_100%)] opacity-60 animate-pan-bg"></div>
+                
+                <!-- Dynamic Network Canvas -->
+                <canvas id="hero-network-canvas" class="absolute inset-0 z-[1] opacity-40 pointer-events-none w-full h-full"></canvas>
+
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02] z-[2]"></div>
             </div>
 
-            <div class="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
+            <div class="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center justify-center">
                 
-                <div class="reveal-element mb-8 md:mb-12 delay-sequence" data-delay-intro="0" data-delay-normal="0">
-                    <!-- Hero Core (HTML/CSS) -->
-                    <div class="relative w-40 h-40 md:w-64 md:h-64 mx-auto perspective-1000 pointer-events-none select-none">
-                        <div class="absolute inset-0 border border-neutral-200 rounded-full animate-spin-slow opacity-40"></div>
-                        <div class="absolute inset-4 border border-dashed border-neutral-300 rounded-full animate-spin-slow-reverse opacity-60"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="relative w-16 h-16 md:w-24 md:h-24 preserve-3d animate-spin-cube">
-                                <div class="absolute inset-0 border border-neutral-900/20 bg-white/10 backdrop-blur-sm translate-z-12"></div>
-                                <div class="absolute inset-0 border border-neutral-900/20 bg-white/10 backdrop-blur-sm transform rotate-y-90 translate-z-12"></div>
-                                <div class="absolute inset-0 border border-neutral-900/20 bg-white/10 backdrop-blur-sm transform rotate-x-90 translate-z-12"></div>
-                                <div class="absolute top-1/2 left-1/2 w-2 h-2 bg-neutral-900 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.5)] -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-                            </div>
-                        </div>
+                <!-- Top Indicator Line -->
+                <div class="reveal-element delay-sequence mb-10 md:mb-12" data-delay-intro="0" data-delay-normal="0">
+                    <div class="flex flex-col items-center">
+                        <div class="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent via-neutral-400 to-transparent mb-6"></div>
+                        <span class="text-[8px] md:text-[9px] tracking-[0.4em] uppercase text-neutral-500 font-mono">Systematic Alpha Architecture</span>
                     </div>
                 </div>
                 
-                <div class="reveal-element mb-8 md:mb-12 delay-sequence" data-delay-intro="100" data-delay-normal="0">
+                <!-- Main Typography with Scramble Effect -->
+                <div class="reveal-element delay-sequence text-center mb-12 md:mb-16" data-delay-intro="100" data-delay-normal="0">
                     <h1 class="flex flex-col items-center font-serif text-neutral-900 leading-none">
-                        <span class="text-[2rem] md:text-7xl lg:text-[6rem] tracking-tight block mb-2 md:mb-4">THE LOGIC OF</span>
-                        <span class="text-[3rem] md:text-9xl lg:text-[10rem] tracking-tighter block italic font-light text-neutral-300 mix-blend-multiply">THE 0.1%</span>
+                        <span class="text-[12px] md:text-[14px] tracking-[0.6em] uppercase text-neutral-500 mb-6 md:mb-8 font-sans font-light border-b border-neutral-300 pb-4 px-8">The Logic Of</span>
+                        <!-- ID added for JS scramble effect -->
+                        <span id="hero-percentage" class="text-[6rem] md:text-[10rem] lg:text-[13rem] tracking-tighter block font-light text-neutral-900 mix-blend-multiply drop-shadow-sm tabular-nums">0.1%</span>
                     </h1>
                 </div>
                 
-                <div class="reveal-element flex flex-col items-center gap-10 delay-sequence" data-delay-intro="300" data-delay-normal="0">
-                    <div class="inline-flex flex-col items-center gap-3 border-y border-neutral-200 py-6 px-8 bg-white/60 backdrop-blur-sm mx-4 md:mx-0 shadow-sm">
-                        <div class="flex items-center gap-2">
-                            <div class="w-1.5 h-1.5 bg-neutral-900 rounded-full animate-pulse"></div>
-                            <span class="text-[9px] font-mono tracking-widest text-neutral-500 uppercase">Systematic Alpha Architecture</span>
-                        </div>
-                        <p class="text-neutral-600 text-[10px] md:text-xs tracking-[0.15em] font-light text-center">
-                            市場の歪みを捕捉する、非公開アルゴリズム・ライセンス。
-                        </p>
-                    </div>
+                <!-- Subtitle & Action -->
+                <div class="reveal-element delay-sequence flex flex-col items-center gap-10" data-delay-intro="300" data-delay-normal="0">
+                    <p class="text-neutral-600 text-[10px] md:text-xs tracking-[0.2em] font-light text-center max-w-md leading-loose">
+                        市場の歪みを捕捉する、<br class="md:hidden" />非公開アルゴリズム・ライセンス。<br />
+                    </p>
 
-                    <button onclick="toggleModal(true)" class="group relative px-12 py-5 bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-[0.3em] overflow-hidden transition-all shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.25)] hover:-translate-y-1 rounded-sm">
-                        <span class="relative z-10 flex items-center gap-3">
+                    <!-- Solid Corporate Button -->
+                    <button onclick="toggleModal(true)" class="group relative px-12 py-5 bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-[0.3em] overflow-hidden transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
+                        <span class="relative z-10 flex items-center gap-4">
                             Enter Private Portal
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300"></i>
                         </span>
-                        <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                        <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
                     </button>
                 </div>
             </div>
 
-            <div class="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce opacity-40">
-                <span class="text-[9px] uppercase tracking-widest text-neutral-400">Scroll</span>
-                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400"></i>
+            <!-- Bottom Scroll Indicator -->
+            <div class="absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-50">
+                <span class="text-[8px] uppercase tracking-[0.3em] text-neutral-500 font-mono" style="writing-mode: vertical-rl;">Scroll</span>
+                <div class="w-[1px] h-12 bg-neutral-400 overflow-hidden relative">
+                    <div class="w-full h-full bg-neutral-900 absolute top-0 left-0 animate-[scan_2s_ease-in-out_infinite]"></div>
+                </div>
             </div>
         </section>
 
@@ -365,7 +389,716 @@
                     </div>
                     <div class="reveal-element bg-white p-8 md:p-10 border border-neutral-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 h-full flex flex-col justify-between" data-delay="150">
                         <div>
-                            <i data-lucide="activity" class="w-6 h-6 text-neutral-900 mb-6 md:mb-8"             header.classList.remove('border-b', 'border-neutral-200/50');
+                            <i data-lucide="activity" class="w-6 h-6 text-neutral-900 mb-6 md:mb-8" stroke-width="1.5"></i>
+                            <h3 class="text-base font-serif text-neutral-900 mb-4">High-Frequency</h3>
+                            <p class="text-neutral-500 text-[10px] leading-6 tracking-wide text-justify">
+                                0.1秒以下の執行スピードによるスリッページ抑制機能。市場の歪みを瞬時に捉える。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="reveal-element bg-white p-8 md:p-10 border border-neutral-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 h-full flex flex-col justify-between" data-delay="300">
+                        <div>
+                            <i data-lucide="shield" class="w-6 h-6 text-neutral-900 mb-6 md:mb-8" stroke-width="1.5"></i>
+                            <h3 class="text-base font-serif text-neutral-900 mb-4">License Model</h3>
+                            <p class="text-neutral-500 text-[10px] leading-6 tracking-wide text-justify">
+                                アルゴリズムの「利用権」を貸与する独自のライセンスモデル。資産管理を最適化。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- GLOBAL INFRASTRUCTURE --- -->
+        <section id="infrastructure" class="py-24 md:py-40 relative bg-white border-b border-neutral-100">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="reveal-element text-center mb-16 md:mb-24">
+                    <span class="text-neutral-400 text-[9px] uppercase tracking-[0.4em] block mb-4">Infrastructure</span>
+                    <h2 class="text-3xl md:text-4xl font-serif text-neutral-900">Low Latency Grid</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative">
+                    <div class="hidden md:block absolute top-12 left-[16.66%] right-[16.66%] h-[1px] bg-neutral-200 z-0"></div>
+
+                    <div class="reveal-element relative z-10 flex flex-col items-center bg-white px-4" data-delay="0">
+                        <div class="w-24 h-24 rounded-full border-[0.5px] border-neutral-300 flex items-center justify-center mb-8 bg-white relative group">
+                            <i data-lucide="server" class="w-7 h-7 text-neutral-800 transition-transform duration-500 group-hover:scale-110" stroke-width="1"></i>
+                            <div class="absolute inset-0 border border-neutral-200 rounded-full animate-ping opacity-20"></div>
+                        </div>
+                        <h3 class="text-xl font-serif text-neutral-900 mb-2">Tokyo (TY3)</h3>
+                        <p class="text-neutral-400 text-[9px] tracking-[0.2em] mb-4 uppercase">PRIMARY EXECUTION</p>
+                        <p class="text-neutral-500 text-[10px] leading-relaxed max-w-xs mx-auto">
+                            JPXコロケーションエリア内での直接接続。マイクロ秒レベルのレイテンシで執行プロセスを最適化。
+                        </p>
+                    </div>
+                    <div class="reveal-element relative z-10 flex flex-col items-center bg-white px-4" data-delay="150">
+                        <div class="w-24 h-24 rounded-full border-[0.5px] border-neutral-300 flex items-center justify-center mb-8 bg-white relative group">
+                            <i data-lucide="database" class="w-7 h-7 text-neutral-800 transition-transform duration-500 group-hover:scale-110" stroke-width="1"></i>
+                            <div class="absolute inset-0 border border-neutral-200 rounded-full animate-ping opacity-20"></div>
+                        </div>
+                        <h3 class="text-xl font-serif text-neutral-900 mb-2">New York (NY4)</h3>
+                        <p class="text-neutral-400 text-[9px] tracking-[0.2em] mb-4 uppercase">DATA AGGREGATION</p>
+                        <p class="text-neutral-500 text-[10px] leading-relaxed max-w-xs mx-auto">
+                            米国市場の流動性データをリアルタイムで集約・解析し、グローバルな相関ロジックの補正に利用。
+                        </p>
+                    </div>
+                    <div class="reveal-element relative z-10 flex flex-col items-center bg-white px-4" data-delay="300">
+                        <div class="w-24 h-24 rounded-full border-[0.5px] border-neutral-300 flex items-center justify-center mb-8 bg-white relative group">
+                            <i data-lucide="globe" class="w-7 h-7 text-neutral-800 transition-transform duration-500 group-hover:scale-110" stroke-width="1"></i>
+                            <div class="absolute inset-0 border border-neutral-200 rounded-full animate-ping opacity-20"></div>
+                        </div>
+                        <h3 class="text-xl font-serif text-neutral-900 mb-2">London (LD4)</h3>
+                        <p class="text-neutral-400 text-[9px] tracking-[0.2em] mb-4 uppercase">RISK HEDGING</p>
+                        <p class="text-neutral-500 text-[10px] leading-relaxed max-w-xs mx-auto">
+                            欧州セッションのボラティリティを監視し、24時間体制のクロスボーダー・リスクヘッジを実行。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- DASHBOARD PREVIEW --- -->
+        <section class="py-24 md:py-40 relative bg-neutral-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row gap-12 md:gap-20">
+                    <div class="w-full md:w-1/3 pt-0 md:pt-10">
+                        <div class="reveal-element">
+                            <span class="text-neutral-400 text-[9px] uppercase tracking-[0.4em] block mb-6">Exclusive View</span>
+                            <h2 class="text-3xl font-serif text-neutral-900 mb-8">Live Execution <br/> Monitor</h2>
+                            <p class="text-neutral-500 text-xs leading-7 tracking-wide mb-8 font-light text-justify">
+                                ライセンスホルダーのみがアクセス可能な専用ダッシュボード。
+                                システム稼働状況、最適化されたポジション推移、およびリスク指標をリアルタイムで監視します。
+                            </p>
+                            <div class="hidden md:block">
+                                <ul class="space-y-6 mt-12 border-t border-neutral-200 pt-8">
+                                    <li class="flex items-center gap-4 text-[9px] uppercase tracking-widest text-neutral-800">
+                                        <div class="w-1 h-1 bg-neutral-900 rounded-full animate-pulse"></div> Real-time Analytics
+                                    </li>
+                                    <li class="flex items-center gap-4 text-[9px] uppercase tracking-widest text-neutral-800">
+                                        <div class="w-1 h-1 bg-neutral-900 rounded-full animate-pulse"></div> Monthly Report
+                                    </li>
+                                    <li class="flex items-center gap-4 text-[9px] uppercase tracking-widest text-neutral-800">
+                                        <div class="w-1 h-1 bg-neutral-900 rounded-full animate-pulse"></div> Asset Optimization
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-2/3 relative group">
+                        <div class="reveal-element" data-delay="300">
+                            <div class="relative bg-white border border-neutral-200 shadow-[0_30px_60px_rgba(0,0,0,0.08)] rounded-sm overflow-hidden p-1 transition-transform duration-700 group-hover:scale-[1.01]">
+                                <div class="bg-[#FCFCFC] p-6 md:p-10 h-full">
+                                    <div class="flex justify-between items-center mb-10 border-b border-neutral-100 pb-4">
+                                        <span class="text-[9px] font-mono text-neutral-400">SYS_ID: 8829-X</span>
+                                        <div class="flex gap-2 items-center">
+                                            <i data-lucide="zap" class="w-2.5 h-2.5 text-green-500 animate-pulse"></i>
+                                            <span class="text-[9px] font-mono text-neutral-400">ACTIVE</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-8">
+                                        <div class="flex justify-between items-end mb-4">
+                                            <p class="text-[9px] uppercase text-neutral-400 tracking-widest">Performance</p>
+                                            <span class="text-[9px] font-mono text-neutral-400 animate-pulse text-red-500">● LIVE</span>
+                                        </div>
+                                        <div class="h-48 md:h-64 w-full bg-white border border-neutral-100 relative overflow-hidden">
+                                            <canvas id="live-chart-canvas" class="w-full h-full"></canvas>
+                                            <div class="absolute inset-0 border-t border-neutral-50 top-1/4 pointer-events-none"></div>
+                                            <div class="absolute inset-0 border-t border-neutral-50 top-2/4 pointer-events-none"></div>
+                                            <div class="absolute inset-0 border-t border-neutral-50 top-3/4 pointer-events-none"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 pt-4">
+                                        <div class="p-4 bg-white border border-neutral-100 rounded-sm">
+                                            <p class="text-[9px] text-neutral-400 mb-1 uppercase tracking-widest">Volatility</p>
+                                            <p class="text-lg font-serif text-neutral-900">LOW</p>
+                                        </div>
+                                        <div class="p-4 bg-white border border-neutral-100 rounded-sm">
+                                            <p class="text-[9px] text-neutral-400 mb-1 uppercase tracking-widest">Latency</p>
+                                            <p class="text-lg font-serif text-neutral-900">12ms</p>
+                                        </div>
+                                        <div class="p-4 bg-neutral-900 text-white rounded-sm hidden md:block">
+                                            <p class="text-[9px] text-neutral-400 mb-1 uppercase tracking-widest">Status</p>
+                                            <p class="text-lg font-serif">OPTIMAL</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="absolute inset-0 bg-white/40 backdrop-blur-[4px] flex items-center justify-center transition-all duration-700 group-hover:backdrop-blur-none group-hover:bg-transparent pointer-events-none">
+                                    <div class="bg-neutral-900 text-white px-8 py-4 text-[9px] uppercase tracking-[0.3em] shadow-2xl transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-4">
+                                        Member Access Only
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- MEMBERSHIP FLOW --- -->
+        <section id="membership" class="py-24 md:py-40 bg-white relative border-t border-neutral-100">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="reveal-element text-center mb-16 md:mb-24">
+                    <h2 class="text-3xl font-serif text-neutral-900 mb-4">Membership Flow</h2>
+                    <p class="text-[9px] uppercase tracking-widest text-neutral-400">Join the Circle</p>
+                </div>
+                
+                <div class="space-y-4 relative">
+                    <div class="reveal-element flex flex-col md:flex-row md:items-start border border-neutral-200 bg-[#FAFAFA] p-8 md:p-10 hover:shadow-lg transition-all duration-500" data-delay="0">
+                        <div class="text-sm font-mono text-neutral-400 mb-4 md:mb-0 md:w-24 md:shrink-0 md:pt-1">01</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg text-neutral-900 font-serif tracking-wide mb-2">Consultation</h3>
+                            <p class="text-neutral-500 text-[10px] tracking-wide leading-relaxed">専属担当者による適合性面談</p>
+                        </div>
+                    </div>
+                    <div class="reveal-element flex flex-col md:flex-row md:items-start border border-neutral-200 bg-[#FAFAFA] p-8 md:p-10 hover:shadow-lg transition-all duration-500" data-delay="100">
+                        <div class="text-sm font-mono text-neutral-400 mb-4 md:mb-0 md:w-24 md:shrink-0 md:pt-1">02</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg text-neutral-900 font-serif tracking-wide mb-2">Agreement</h3>
+                            <p class="text-neutral-500 text-[10px] tracking-wide leading-relaxed">システム利用ライセンス契約の締結</p>
+                        </div>
+                    </div>
+                    <div class="reveal-element flex flex-col md:flex-row md:items-start border border-neutral-200 bg-[#FAFAFA] p-8 md:p-10 hover:shadow-lg transition-all duration-500" data-delay="200">
+                        <div class="text-sm font-mono text-neutral-400 mb-4 md:mb-0 md:w-24 md:shrink-0 md:pt-1">03</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg text-neutral-900 font-serif tracking-wide mb-2">Activation</h3>
+                            <p class="text-neutral-500 text-[10px] tracking-wide leading-relaxed">専用アカウント発行とアルゴリズム稼働</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal-element mt-24 md:mt-32 text-center" data-delay="400">
+                    <p class="text-neutral-400 text-[10px] mb-10 tracking-widest leading-loose">
+                        現在、新規のライセンス発行は<br class="md:hidden"/>
+                        <span class="text-neutral-900 border-b border-neutral-300 pb-0.5 mx-1">紹介制（Referral Only）</span>となっております。
+                    </p>
+                    <button onclick="toggleModal(true)" class="px-12 py-5 border border-neutral-300 text-neutral-900 text-[9px] uppercase tracking-[0.25em] hover:bg-neutral-900 hover:text-white transition-all duration-300">
+                        Request Waiting List
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PAGE: PRIVACY -->
+    <main id="page-privacy" class="hidden min-h-screen bg-[#F8F8F8] pt-40 pb-40">
+        <div class="max-w-4xl mx-auto px-6 md:px-12">
+            <button onclick="navigateTo('home')" class="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-neutral-400 hover:text-neutral-900 transition-colors mb-16">
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform"></i> 
+                Return to Portal
+            </button>
+            <div class="mb-20 border-b border-neutral-200 pb-8">
+                <h1 class="text-3xl md:text-5xl font-serif text-neutral-900 tracking-tight">Privacy Policy</h1>
+                <p class="text-[10px] text-neutral-400 font-mono mt-4 uppercase tracking-widest">Legal & Compliance | Last Updated: V4.0 Protocol</p>
+            </div>
+            <div class="space-y-16">
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">1. Information Collection and Retention</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">Credit Capital Partners (hereinafter referred to as "the Firm") rigorously collects and maintains highly sensitive information, including but not limited to client identity, contact details, financial standing, and KYC (Know Your Customer) documentation during the license issuance and vetting process. The acquisition of such data is executed strictly through lawful and equitable means.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">Credit Capital Partners（以下「当社」）は、ライセンス発行の審査および適合性評価において、クライアントの氏名、連絡先、資産状況、およびKYC（顧客確認）書類を含む厳秘性の高い情報を適法かつ公正な手段によって収集・保管します。情報の取得は、常に法令を遵守したプロセスを経て実行されます。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">2. Purpose of Processing and Utilization</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">The collected data is strictly utilized for the evaluation of algorithmic suitability, provisioning of secure dedicated accounts, issuance of performance analytics, and fulfillment of statutory obligations such as Anti-Money Laundering (AML) and Counter-Terrorist Financing (CTF) directives. The Firm categorically prohibits the utilization of client data for unrelated commercial marketing purposes.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">収集されたデータは、アルゴリズムの適合性評価、専用セキュアアカウントの発行、パフォーマンス分析の提供、およびマネーロンダリング防止（AML）やテロ資金供与対策（CTF）等の法的義務の遂行という厳格な目的のためにのみ使用されます。マーケティング等の無関係な商業目的での利用は一切行いません。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">3. Enterprise-Grade Security Architecture</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">To safeguard client confidentiality, the Firm deploys institutional-grade security protocols, including end-to-end encryption, multi-factor authentication (MFA), and stringent physical and logical access controls. Access to proprietary data is restricted exclusively to authorized personnel essential for operational continuity.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">当社は、クライアント情報を保護するため、機関投資家・金融機関と同等水準のエンドツーエンド暗号化通信、多要素認証（MFA）、および物理的・論理的アクセス制限を実施しています。情報へのアクセスは、業務継続に必要不可欠な一部の権限保持者のみに厳格に限定されます。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">4. Strict Non-Disclosure to Third Parties</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">Under no circumstances shall the Firm disclose, disseminate, or monetize client personal information to any third party without explicit prior consent, except where mandated by binding legal processes from recognized judicial or regulatory authorities, or in emergency situations to protect vital interests.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">法令に基づく司法機関や規制当局からの正式な開示要求、または生命・財産の保護のために緊急の必要がある場合を除き、当社がクライアントの事前の同意なく第三者に個人情報を提供、拡散、または収益化することはいかなる状況においても存在しません。</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- PAGE: TERMS -->
+    <main id="page-terms" class="hidden min-h-screen bg-[#F8F8F8] pt-40 pb-40">
+        <div class="max-w-4xl mx-auto px-6 md:px-12">
+            <button onclick="navigateTo('home')" class="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-neutral-400 hover:text-neutral-900 transition-colors mb-16">
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform"></i> 
+                Return to Portal
+            </button>
+            <div class="mb-20 border-b border-neutral-200 pb-8">
+                <h1 class="text-3xl md:text-5xl font-serif text-neutral-900 tracking-tight">Terms of License</h1>
+                <p class="text-[10px] text-neutral-400 font-mono mt-4 uppercase tracking-widest">Legal & Compliance | Last Updated: V4.0 Protocol</p>
+            </div>
+            <div class="space-y-16">
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">1. Nature of the License Agreement</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">This Terms of License agreement stipulates the conditions under which the Firm grants an exclusive, non-transferable right to utilize the "CCP PROPRIETARY" algorithmic system. This agreement constitutes a pure software and intellectual property licensing contract and shall not, under any circumstances, be construed as an investment management or advisory contract under the Financial Instruments and Exchange Act of Japan.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">本利用規約は、当社が独自開発したアルゴリズム・システム「CCP PROPRIETARY」の排他的かつ譲渡不能な利用権（ライセンス）を付与する条件を定めるものです。本契約は純粋なソフトウェアおよび知的財産の利用許諾契約であり、日本の金融商品取引法に基づく投資運用契約や投資助言契約として解釈されることは一切ありません。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">2. Absolute Protection of Intellectual Property</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">All copyrights, patents, source codes, quantitative logics, predictive models, and associated documentation embedded within the System remain the exclusive intellectual property of the Firm. The Client is strictly prohibited from engaging in reverse engineering, decompilation, unauthorized duplication, or the creation of derivative works.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">本システムに組み込まれたすべての著作権、特許権、ソースコード、クオンツロジック、予測モデル、および関連ドキュメントに関する知的財産権は、完全に当社に帰属します。クライアントは、リバースエンジニアリング、逆コンパイル、無断複製、または二次的著作物の作成を行うことを固く禁じられます。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">3. Perpetual Confidentiality Obligation</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">The Client assumes a rigorous obligation to maintain absolute confidentiality regarding the existence of the System, execution specifications, operational status, and any reporting metrics provided via the dashboard. This non-disclosure obligation shall survive the termination of the license agreement perpetually.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">クライアントは、本システムの存在、実行仕様、稼働状況、およびダッシュボード等を通じて提供される一切のレポート内容に関して、絶対的な守秘義務を負います。この機密保持義務は、ライセンス契約の終了後も永続的に存続するものとします。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">4. Suspension, Termination, and Force Majeure</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">The Firm reserves the unilateral right to suspend or terminate the license immediately upon any breach of these terms. Furthermore, the Firm may halt system operations without prior notice due to extreme market volatility, infrastructural maintenance, or Force Majeure events beyond reasonable control.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">当社は、クライアントが本規約のいずれかに違反した場合、一方的にライセンスを即時停止または解除する権利を留保します。また、極端な市場変動、インフラの保守、または合理的な制御を超える不可抗力（Force Majeure）事象により、事前の予告なくシステムの稼働を一時停止することがあります。</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- PAGE: DISCLAIMER -->
+    <main id="page-disclaimer" class="hidden min-h-screen bg-[#F8F8F8] pt-40 pb-40">
+        <div class="max-w-4xl mx-auto px-6 md:px-12">
+            <button onclick="navigateTo('home')" class="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-neutral-400 hover:text-neutral-900 transition-colors mb-16">
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform"></i> 
+                Return to Portal
+            </button>
+            <div class="mb-20 border-b border-neutral-200 pb-8">
+                <h1 class="text-3xl md:text-5xl font-serif text-neutral-900 tracking-tight">Disclaimer</h1>
+                <p class="text-[10px] text-neutral-400 font-mono mt-4 uppercase tracking-widest">Legal & Compliance | Last Updated: V4.0 Protocol</p>
+            </div>
+            <div class="space-y-16">
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">1. Non-Solicitation and Absence of Investment Advice</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">The materials and information presented on this platform are strictly for the purpose of outlining the functionalities of the "CCP PROPRIETARY" system and inviting qualified entities for licensing. None of the content herein constitutes an offer, solicitation, or recommendation to buy or sell any securities, nor does it qualify as investment advisory or asset management services under applicable jurisdictions.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">当プラットフォーム上のすべての資料および情報は、「CCP PROPRIETARY」システムの機能概要を示し、適格な対象者にライセンスを案内することのみを目的としています。いかなる内容も、有価証券の売買の勧誘、提案、推奨を構成するものではなく、適用される管轄区域における投資助言または資産運用サービスに該当するものではありません。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">2. Inherent Market Risks and Complete Assumption of Risk</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">While the System is engineered leveraging advanced statistical arbitrage and computational sciences, financial markets possess inherent, non-deterministic risks. The Firm explicitly disclaims any guarantee of future absolute returns or principal preservation. All economic outcomes and risks associated with deploying the algorithmic license rest entirely with the Client.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">本システムは高度な統計的裁定取引と計算機科学を活用して構築されていますが、金融市場には非決定論的で内在的なリスクが存在します。当社は、将来の絶対的な収益や元本の保全をいかなる形でも保証しません。アルゴリズム・ライセンスの稼働に伴うすべての経済的結果およびリスクは、完全にクライアント自身に帰属します。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">3. Limitations of Historical Data and Back-Testing</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">Simulated back-test results, hypothetical scenarios, and historical performance metrics displayed do not represent actual trading and are subject to hindsight bias. Past performance is definitively not indicative of future results, and actual execution may significantly diverge due to shifting liquidity regimes.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">表示されているシミュレーションによるバックテスト結果、仮想シナリオ、および過去のパフォーマンス指標は実際の取引を表すものではなく、後知恵バイアス（Hindsight Bias）の影響を受けます。過去の実績は将来の結果を示唆するものでは決してなく、流動性環境の変化により実際の執行結果は大きく乖離する可能性があります。</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-sm md:text-base font-serif text-neutral-900 mb-6 tracking-widest uppercase border-b border-neutral-200 pb-2">4. Systemic Risks and Absolute Limitation of Liability</h3>
+                    <div class="space-y-4">
+                        <p class="text-neutral-800 text-xs md:text-sm leading-loose tracking-wide font-serif">The Firm shall bear zero legal or financial liability for direct, indirect, or derivative losses incurred as a result of exchange infrastructure failures, network latency spikes, sudden liquidity vacuums (Black Swan events), algorithm anomalies, or any other systemic disruptions. Execution relies entirely on the Client's independent discretion.</p>
+                        <p class="text-neutral-500 text-[10px] md:text-xs leading-relaxed tracking-widest font-light">取引所のインフラ障害、ネットワーク遅延の急増、突発的な流動性の枯渇（ブラックスワン・イベント）、アルゴリズムの異常、またはその他のシステミックな障害に起因して発生した直接的、間接的、または派生的な損失について、当社は法的および経済的な責任を一切負いません。執行は完全にクライアントの独立した判断に依存します。</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- --- FOOTER --- -->
+    <footer class="bg-white py-24 border-t border-neutral-100 text-neutral-400 text-[10px] relative z-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-16">
+            <div class="col-span-1 md:col-span-2">
+                <h4 class="text-neutral-900 text-sm font-serif mb-8 tracking-widest">Credit Capital Partners</h4>
+                <p class="leading-relaxed mb-8 max-w-sm font-light text-neutral-500">
+                    Capitalizing on Intelligence.<br />
+                    The bridge between raw data and refined asset growth.
+                </p>
+            </div>
+            <div class="space-y-6">
+                <h5 class="text-neutral-900 uppercase tracking-widest mb-4">Contact</h5>
+                <p class="tracking-wide leading-relaxed">
+                    Cerulean Tower<br />
+                    26-1 Sakuragaoka-cho<br />
+                    Shibuya-ku, Tokyo
+                </p>
+            </div>
+            <div class="space-y-6">
+                <h5 class="text-neutral-900 uppercase tracking-widest mb-4">Legal</h5>
+                <p onclick="navigateTo('privacy')" class="hover:text-neutral-900 cursor-pointer transition-colors tracking-wide">Privacy Policy</p>
+                <p onclick="navigateTo('terms')" class="hover:text-neutral-900 cursor-pointer transition-colors tracking-wide">Terms of License</p>
+                <p onclick="navigateTo('disclaimer')" class="hover:text-neutral-900 cursor-pointer transition-colors tracking-wide">Disclaimer</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 border-t border-neutral-100 pt-10 flex flex-col md:flex-row justify-between items-start gap-8">
+            <p class="tracking-widest">&copy; 2019-2026 Credit Capital Partners By SIGMA AGENCY LLC</p>
+            <p class="text-neutral-300 text-justify md:w-1/2 leading-relaxed tracking-wide">
+                【重要】当ウェブサイトは、独自開発システム「CCP PROPRIETARY」の機能紹介を目的としており、金融商品取引法に基づく投資助言・運用、勧誘を行うものではありません。
+            </p>
+        </div>
+    </footer>
+
+    <!-- --- MODAL (Login) --- -->
+    <div id="login-modal" class="fixed inset-0 z-[110] flex items-center justify-center bg-[#FAFAFA]/90 backdrop-blur-md p-4 transition-all duration-500 opacity-0 invisible">
+        <div class="bg-white border border-neutral-100 p-8 md:p-12 max-w-sm w-full relative shadow-[0_20px_40px_rgba(0,0,0,0.05)] transform scale-95 transition-transform duration-500" id="login-modal-inner">
+            <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-neutral-400 hover:text-black transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div class="text-center mb-10">
+                <i data-lucide="lock" class="w-5 h-5 text-neutral-900 mx-auto mb-6" stroke-width="1"></i>
+                <h3 class="text-[10px] font-serif text-neutral-900 tracking-[0.2em] uppercase">Private Access</h3>
+            </div>
+            <form class="space-y-6" onsubmit="event.preventDefault();">
+                <div class="group">
+                    <input type="text" placeholder="SECURE ID" class="w-full bg-transparent border-b border-neutral-200 py-3 text-neutral-900 text-[10px] tracking-[0.2em] placeholder:text-neutral-300 focus:outline-none focus:border-neutral-900 transition-colors" />
+                </div>
+                <div class="group">
+                    <input type="password" placeholder="PASSWORD" class="w-full bg-transparent border-b border-neutral-200 py-3 text-neutral-900 text-[10px] tracking-[0.2em] placeholder:text-neutral-300 focus:outline-none focus:border-neutral-900 transition-colors" />
+                </div>
+                <button type="submit" class="w-full bg-neutral-900 text-white py-4 text-[9px] uppercase font-bold tracking-[0.25em] mt-8 hover:bg-neutral-800 transition-all hover:shadow-lg">
+                    Authenticate
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        // --- Init Lucide Icons ---
+        lucide.createIcons();
+
+        // --- Network Particles Canvas Logic ---
+        function initHeroCanvas() {
+            const canvas = document.getElementById('hero-network-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            
+            function resize() {
+                width = canvas.width = canvas.offsetWidth;
+                height = canvas.height = canvas.offsetHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Screen size dependent particle count
+            const particleCount = window.innerWidth < 768 ? 30 : 60;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    size: Math.random() * 1.5 + 0.5
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = 'rgba(23, 23, 23, 0.8)';
+                ctx.strokeStyle = 'rgba(23, 23, 23, 0.15)';
+                ctx.lineWidth = 0.5;
+
+                for (let i = 0; i < particleCount; i++) {
+                    let p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Bounce off edges
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Connect close particles
+                    for (let j = i + 1; j < particleCount; j++) {
+                        let p2 = particles[j];
+                        let dist = Math.sqrt(Math.pow(p.x - p2.x, 2) + Math.pow(p.y - p2.y, 2));
+                        if (dist < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // --- Number Scramble Effect ---
+        function runNumberScramble() {
+            const el = document.getElementById('hero-percentage');
+            if(!el) return;
+            
+            const finalVal = '0.1%';
+            let iterations = 0;
+            const maxIterations = 30; // Number of shuffles
+            
+            // Wait slightly before starting
+            setTimeout(() => {
+                const interval = setInterval(() => {
+                    if(iterations >= maxIterations) {
+                        el.innerText = finalVal;
+                        clearInterval(interval);
+                        return;
+                    }
+                    // Generate random numbers like 8.3%, 1.9%, etc.
+                    const randomNum = (Math.random() * 9.9).toFixed(1);
+                    el.innerText = randomNum + '%';
+                    iterations++;
+                }, 50); // Speed of shuffle
+            }, 800);
+        }
+
+        // --- Intro Sequence ---
+        const introOverlay = document.getElementById('intro-overlay');
+        const introContent = document.getElementById('intro-content');
+        const introLine = document.getElementById('intro-line');
+
+        function runIntro() {
+            initHeroCanvas(); // Start background animation immediately
+
+            if (sessionStorage.getItem('ccp_intro_html') === 'true') {
+                introOverlay.style.display = 'none';
+                initReveal(0); // No delay for normal load
+                runNumberScramble(); // Run scramble immediately
+                return;
+            }
+
+            setTimeout(() => {
+                introContent.classList.remove('opacity-0', 'translate-y-4');
+                introContent.classList.add('opacity-100', 'translate-y-0');
+            }, 500);
+
+            setTimeout(() => {
+                introLine.style.width = '100%';
+            }, 1000);
+
+            setTimeout(() => {
+                introOverlay.classList.add('-translate-y-full');
+                runNumberScramble(); // Trigger scramble as overlay lifts
+            }, 2200);
+
+            setTimeout(() => {
+                introOverlay.style.display = 'none';
+                sessionStorage.setItem('ccp_intro_html', 'true');
+                initReveal(0);
+            }, 3400);
+        }
+
+        // --- Intersection Observer for Scroll Animations ---
+        function initReveal(baseDelay) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        let delay = parseInt(el.getAttribute('data-delay') || '0');
+                        
+                        if (el.classList.contains('delay-sequence')) {
+                            const isFirstLoad = sessionStorage.getItem('ccp_intro_html_seen') !== 'true';
+                            delay = parseInt(el.getAttribute(isFirstLoad ? 'data-delay-intro' : 'data-delay-normal') || '0');
+                            if(isFirstLoad) delay += baseDelay;
+                        }
+
+                        setTimeout(() => {
+                            el.classList.add('is-visible');
+                        }, delay);
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-element').forEach(el => observer.observe(el));
+            sessionStorage.setItem('ccp_intro_html_seen', 'true');
+        }
+
+        // --- Navigation (SPA Logic) ---
+        const pages = ['home', 'privacy', 'terms', 'disclaimer'];
+        function navigateTo(targetPage) {
+            pages.forEach(p => {
+                document.getElementById(`page-${p}`).classList.add('hidden');
+                document.getElementById(`page-${p}`).classList.remove('block');
+            });
+            document.getElementById(`page-${targetPage}`).classList.remove('hidden');
+            document.getElementById(`page-${targetPage}`).classList.add('block');
+            
+            if(targetPage === 'home') loadTradingView();
+            
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        function navLinkClick(event, targetPage, sectionId) {
+            event.preventDefault();
+            const currentPage = pages.find(p => document.getElementById(`page-${p}`).classList.contains('block'));
+            if (currentPage !== targetPage) {
+                navigateTo(targetPage);
+                setTimeout(() => {
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else {
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- Mobile Menu Toggle ---
+        let isMenuOpen = false;
+        function toggleMenu() {
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const header = document.getElementById('main-header');
+            isMenuOpen = !isMenuOpen;
+
+            if (isMenuOpen) {
+                overlay.classList.remove('-translate-y-full', 'opacity-0', 'invisible');
+                overlay.classList.add('translate-y-0', 'opacity-100', 'visible');
+                document.body.style.overflow = 'hidden';
+                header.classList.replace('bg-white/90', 'bg-transparent');
+                header.classList.replace('backdrop-blur-xl', 'backdrop-blur-none');
+                header.classList.remove('border-b', 'border-neutral-200/50');
+                header.classList.add('border-transparent');
+            } else {
+                overlay.classList.add('-translate-y-full', 'opacity-0', 'invisible');
+                overlay.classList.remove('translate-y-0', 'opacity-100', 'visible');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    header.classList.replace('bg-transparent', 'bg-white/90');
+                    header.classList.replace('backdrop-blur-none', 'backdrop-blur-xl');
+                    if(window.scrollY > 10) {
+                        header.classList.remove('border-transparent');
+                        header.classList.add('border-b', 'border-neutral-200/50');
+                    }
+                }, 300);
+            }
+        }
+
+        // --- Modal Toggle ---
+        function toggleModal(show) {
+            const modal = document.getElementById('login-modal');
+            const inner = document.getElementById('login-modal-inner');
+            if (show) {
+                modal.classList.remove('opacity-0', 'invisible');
+                inner.classList.remove('scale-95');
+                inner.classList.add('scale-100');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('opacity-0', 'invisible');
+                inner.classList.remove('scale-100');
+                inner.classList.add('scale-95');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- Live Chart Logic ---
+        const canvas = document.getElementById('live-chart-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let dataPoints = Array.from({length: 80}, () => 50 + Math.random() * 10);
+            
+            function drawChart() {
+                if (canvas.width !== canvas.offsetWidth) {
+                    canvas.width = canvas.offsetWidth;
+                    canvas.height = canvas.offsetHeight;
+                }
+                const w = canvas.width;
+                const h = canvas.height;
+                
+                let newPoint = dataPoints[dataPoints.length - 1] + (Math.random() - 0.5) * 8;
+                newPoint = Math.max(20, Math.min(80, newPoint));
+                dataPoints.push(newPoint);
+                dataPoints.shift();
+
+                ctx.clearRect(0, 0, w, h);
+                ctx.beginPath();
+                const stepX = w / 79;
+                
+                const grad = ctx.createLinearGradient(0, 0, w, 0);
+                grad.addColorStop(0, "rgba(23,23,23,0)");
+                grad.addColorStop(0.2, "rgba(23,23,23,0.1)");
+                grad.addColorStop(0.8, "rgba(23,23,23,0.8)");
+                grad.addColorStop(1, "rgba(23,23,23,1)");
+
+                for (let i = 0; i < dataPoints.length; i++) {
+                    const x = i * stepX;
+                    const y = h - (dataPoints[i] / 100) * h;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else {
+                        const prevX = (i - 1) * stepX;
+                        const prevY = h - (dataPoints[i - 1] / 100) * h;
+                        const cx = (prevX + x) / 2;
+                        ctx.quadraticCurveTo(prevX, prevY, cx, (prevY + y) / 2);
+                        if (i === dataPoints.length - 1) ctx.lineTo(x, y);
+                    }
+                }
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = grad;
+                ctx.stroke();
+
+                const lx = 79 * stepX;
+                const ly = h - (dataPoints[79] / 100) * h;
+                ctx.beginPath();
+                ctx.arc(lx, ly, 3, 0, Math.PI * 2);
+                ctx.fillStyle = "#171717";
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(lx, ly, 12, 0, Math.PI * 2);
+                ctx.strokeStyle = "rgba(23,23,23,0.1)";
+                ctx.stroke();
+
+                setTimeout(() => requestAnimationFrame(drawChart), 40);
+            }
+            drawChart();
+        }
+
+        // --- TradingView Init ---
+        function loadTradingView() {
+            const container = document.getElementById('tv-widget-container');
+            if (container && !container.querySelector('script')) {
+                const script = document.createElement('script');
+                script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+                script.async = true;
+                script.innerHTML = JSON.stringify({
+                    "symbols": [
+                    { "proName": "FOREXCOM:USDJPY", "title": "USD/JPY" },
+                    { "proName": "FX:EURUSD", "title": "EUR/USD" },
+                    { "proName": "BITSTAMP:BTCUSD", "title": "BTC/USD" },
+                    { "proName": "INDEX:NKY", "title": "Nikkei 225" },
+                    { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" }
+                    ],
+                    "showSymbolLogo": false,
+                    "colorTheme": "light",
+                    "isTransparent": true,
+                    "locale": "ja"
+                });
+                container.appendChild(script);
+            }
+        }
+
+        // --- Header Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (!isMenuOpen) {
+                if (window.scrollY > 10) {
+                    header.classList.remove('border-transparent');
+                    header.classList.add('border-b', 'border-neutral-200/50');
+                } else {
+                    header.classList.add('border-transparent');
+                    header.classList.remove('border-b', 'border-neutral-200/50');
                 }
             }
         });
