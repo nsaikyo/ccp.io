@@ -88,58 +88,69 @@
          style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);">
     </div>
 
-    <!-- --- NAVIGATION --- -->
-    <nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500 bg-white/90 backdrop-blur-xl border-b border-neutral-200/50 py-4">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative gap-8">
-            <!-- Logo Section -->
-            <div onclick="navigateTo('home')" class="flex items-center gap-3 md:gap-4 group cursor-pointer z-50 shrink-0">
-                <!-- Star Logo (Black) -->
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-900" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px; flex-shrink: 0;">
-                    <path d="M50 0C50 0 55 35 95 50C55 65 50 100 50 100C50 100 45 65 5 50C45 35 50 0 50 0Z" fill="currentColor" />
-                    <circle cx="50" cy="50" r="5" fill="currentColor" class="opacity-50" />
-                </svg>
-                <span class="hidden sm:inline text-[10px] md:text-xs tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold whitespace-nowrap">
-                    Credit Capital Partners
-                </span>
-                <span class="sm:hidden text-[10px] tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold whitespace-nowrap">
-                    Credit Capital
-                </span>
-            </div>
+    <!-- --- HEADER (NAVIGATION & TICKER COMBINED) --- -->
+    <header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-500 bg-white/90 backdrop-blur-xl border-b border-transparent">
+        
+        <!-- Navigation -->
+        <nav id="main-nav" class="py-4">
+            <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative gap-8">
+                <!-- Logo Section -->
+                <div onclick="navigateTo('home')" class="flex items-center gap-3 md:gap-4 group cursor-pointer shrink-0">
+                    <!-- Star Logo (Black) -->
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-neutral-900" style="width: 24px; height: 24px; min-width: 24px; min-height: 24px; flex-shrink: 0;">
+                        <path d="M50 0C50 0 55 35 95 50C55 65 50 100 50 100C50 100 45 65 5 50C45 35 50 0 50 0Z" fill="currentColor" />
+                        <circle cx="50" cy="50" r="5" fill="currentColor" class="opacity-50" />
+                    </svg>
+                    <span class="hidden sm:inline text-[10px] md:text-xs tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold whitespace-nowrap">
+                        Credit Capital Partners
+                    </span>
+                    <span class="sm:hidden text-[10px] tracking-[0.2em] font-serif text-neutral-900 uppercase font-bold whitespace-nowrap">
+                        Credit Capital
+                    </span>
+                </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden xl:flex items-center gap-8 shrink-0">
-                <a href="#philosophy" onclick="navLinkClick(event, 'home', 'philosophy')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Philosophy
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#methodology" onclick="navLinkClick(event, 'home', 'methodology')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Methodology
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#architecture" onclick="navLinkClick(event, 'home', 'architecture')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Architecture
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#infrastructure" onclick="navLinkClick(event, 'home', 'infrastructure')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Infrastructure
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <a href="#membership" onclick="navLinkClick(event, 'home', 'membership')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
-                    Membership
-                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
-                </a>
-                <button onclick="toggleModal(true)" class="ml-4 px-6 py-2 border-[0.5px] border-neutral-300 text-neutral-900 text-[9px] uppercase tracking-[0.25em] hover:bg-neutral-900 hover:text-white transition-all duration-500 hover:shadow-lg whitespace-nowrap">
-                    Client Login
+                <!-- Desktop Menu -->
+                <div class="hidden xl:flex items-center gap-8 shrink-0">
+                    <a href="#philosophy" onclick="navLinkClick(event, 'home', 'philosophy')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Philosophy
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#methodology" onclick="navLinkClick(event, 'home', 'methodology')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Methodology
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#architecture" onclick="navLinkClick(event, 'home', 'architecture')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Architecture
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#infrastructure" onclick="navLinkClick(event, 'home', 'infrastructure')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Infrastructure
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <a href="#membership" onclick="navLinkClick(event, 'home', 'membership')" class="relative text-[9px] uppercase tracking-[0.3em] text-neutral-500 hover:text-neutral-900 transition-colors duration-300 font-medium group py-2 whitespace-nowrap">
+                        Membership
+                        <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-neutral-900 transition-all duration-500 group-hover:w-full"></span>
+                    </a>
+                    <button onclick="toggleModal(true)" class="ml-4 px-6 py-2 border-[0.5px] border-neutral-300 text-neutral-900 text-[9px] uppercase tracking-[0.25em] hover:bg-neutral-900 hover:text-white transition-all duration-500 hover:shadow-lg whitespace-nowrap">
+                        Client Login
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="xl:hidden text-neutral-900 p-2 shrink-0" onclick="toggleMenu()" aria-label="Toggle Menu">
+                    <i data-lucide="menu" id="menu-icon-open"></i>
+                    <i data-lucide="x" id="menu-icon-close" class="hidden"></i>
                 </button>
             </div>
+        </nav>
 
-            <!-- Mobile Menu Toggle -->
-            <button class="xl:hidden text-neutral-900 z-50 p-2 shrink-0" onclick="toggleMenu()" aria-label="Toggle Menu">
-                <i data-lucide="menu" id="menu-icon-open"></i>
-                <i data-lucide="x" id="menu-icon-close" class="hidden"></i>
-            </button>
+        <!-- Ticker Tape -->
+        <div id="ticker-container" class="h-[40px] w-full border-t border-neutral-200/50 bg-white/50 relative overflow-hidden">
+            <div class="tradingview-widget-container w-full h-full opacity-90 hover:opacity-100 transition-opacity" id="tv-widget-container">
+                <div class="tradingview-widget-container__widget w-full h-full"></div>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <!-- MOBILE MENU OVERLAY -->
     <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-[#FAFAFA] flex flex-col transition-all duration-500 ease-[0.22,1,0.36,1] -translate-y-full opacity-0 invisible">
@@ -193,7 +204,8 @@
     <main id="page-home" class="block">
         
         <!-- --- HERO SECTION --- -->
-        <section class="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden pb-20 pt-24">
+        <!-- ヘッダーとティッカーが高くなった分、pt-24をpt-32に変更して余白を確保 -->
+        <section class="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden pb-20 pt-32">
             <!-- BACKGROUND -->
             <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 opacity-[0.12] mix-blend-multiply pointer-events-none">
@@ -560,7 +572,7 @@
     </main>
 
     <!-- PAGE: PRIVACY -->
-    <main id="page-privacy" class="hidden min-h-screen bg-[#F8F8F8] pt-32 pb-40">
+    <main id="page-privacy" class="hidden min-h-screen bg-[#F8F8F8] pt-40 pb-40">
         <div class="max-w-4xl mx-auto px-6 md:px-12">
             <button onclick="navigateTo('home')" class="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-neutral-400 hover:text-neutral-900 transition-colors mb-16">
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform"></i> 
@@ -604,7 +616,7 @@
     </main>
 
     <!-- PAGE: TERMS -->
-    <main id="page-terms" class="hidden min-h-screen bg-[#F8F8F8] pt-32 pb-40">
+    <main id="page-terms" class="hidden min-h-screen bg-[#F8F8F8] pt-40 pb-40">
         <div class="max-w-4xl mx-auto px-6 md:px-12">
             <button onclick="navigateTo('home')" class="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-neutral-400 hover:text-neutral-900 transition-colors mb-16">
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform"></i> 
@@ -648,7 +660,7 @@
     </main>
 
     <!-- PAGE: DISCLAIMER -->
-    <main id="page-disclaimer" class="hidden min-h-screen bg-[#F8F8F8] pt-32 pb-40">
+    <main id="page-disclaimer" class="hidden min-h-screen bg-[#F8F8F8] pt-40 pb-40">
         <div class="max-w-4xl mx-auto px-6 md:px-12">
             <button onclick="navigateTo('home')" class="group flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-neutral-400 hover:text-neutral-900 transition-colors mb-16">
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 rotate-180 group-hover:-translate-x-1 transition-transform"></i> 
@@ -691,15 +703,8 @@
         </div>
     </main>
 
-    <!-- --- TICKER --- -->
-    <div id="ticker-container" class="fixed bottom-0 left-0 w-full z-40 bg-white/95 backdrop-blur-md border-t border-neutral-200 pb-[env(safe-area-inset-bottom)]">
-        <div class="tradingview-widget-container w-full opacity-90 hover:opacity-100 transition-opacity overflow-hidden" id="tv-widget-container">
-            <div class="tradingview-widget-container__widget w-full"></div>
-        </div>
-    </div>
-
     <!-- --- FOOTER --- -->
-    <footer class="bg-white py-24 border-t border-neutral-100 text-neutral-400 text-[10px] mb-[48px] relative z-10">
+    <footer class="bg-white py-24 border-t border-neutral-100 text-neutral-400 text-[10px] relative z-10">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-16">
             <div class="col-span-1 md:col-span-2">
                 <h4 class="text-neutral-900 text-sm font-serif mb-8 tracking-widest">Credit Capital Partners</h4>
@@ -852,25 +857,29 @@
         let isMenuOpen = false;
         function toggleMenu() {
             const overlay = document.getElementById('mobile-menu-overlay');
-            const nav = document.getElementById('main-nav');
+            const header = document.getElementById('main-header');
             isMenuOpen = !isMenuOpen;
 
             if (isMenuOpen) {
                 overlay.classList.remove('-translate-y-full', 'opacity-0', 'invisible');
                 overlay.classList.add('translate-y-0', 'opacity-100', 'visible');
                 document.body.style.overflow = 'hidden';
-                nav.classList.replace('bg-white/90', 'bg-transparent');
-                nav.classList.replace('backdrop-blur-xl', 'backdrop-blur-none');
-                nav.classList.remove('border-b');
+                header.classList.replace('bg-white/90', 'bg-transparent');
+                header.classList.replace('backdrop-blur-xl', 'backdrop-blur-none');
+                header.classList.remove('border-b', 'border-neutral-200/50');
+                header.classList.add('border-transparent');
             } else {
                 overlay.classList.add('-translate-y-full', 'opacity-0', 'invisible');
                 overlay.classList.remove('translate-y-0', 'opacity-100', 'visible');
                 document.body.style.overflow = '';
                 // Wait for animation
                 setTimeout(() => {
-                    nav.classList.replace('bg-transparent', 'bg-white/90');
-                    nav.classList.replace('backdrop-blur-none', 'backdrop-blur-xl');
-                    if(window.scrollY > 10) nav.classList.add('border-b');
+                    header.classList.replace('bg-transparent', 'bg-white/90');
+                    header.classList.replace('backdrop-blur-none', 'backdrop-blur-xl');
+                    if(window.scrollY > 10) {
+                        header.classList.remove('border-transparent');
+                        header.classList.add('border-b', 'border-neutral-200/50');
+                    }
                 }, 300);
             }
         }
@@ -957,11 +966,12 @@
         // --- TradingView Init ---
         function loadTradingView() {
             const container = document.getElementById('tv-widget-container');
-            // Check if script has already been loaded instead of checking innerHTML
+            // Check if script has already been loaded
             if (container && !container.querySelector('script')) {
                 const script = document.createElement('script');
                 script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
                 script.async = true;
+                // displayModeの指定を完全に削除し、強制的に流動するモードへ変更
                 script.innerHTML = JSON.stringify({
                     "symbols": [
                     { "proName": "FOREXCOM:USDJPY", "title": "USD/JPY" },
@@ -973,21 +983,22 @@
                     "showSymbolLogo": false,
                     "colorTheme": "light",
                     "isTransparent": true,
-                    "displayMode": "regular",
                     "locale": "ja"
                 });
                 container.appendChild(script);
             }
         }
 
-        // --- Navbar Scroll Effect ---
+        // --- Header Scroll Effect ---
         window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
+            const header = document.getElementById('main-header');
             if (!isMenuOpen) {
                 if (window.scrollY > 10) {
-                    nav.classList.add('border-b');
+                    header.classList.remove('border-transparent');
+                    header.classList.add('border-b', 'border-neutral-200/50');
                 } else {
-                    nav.classList.remove('border-b');
+                    header.classList.add('border-transparent');
+                    header.classList.remove('border-b', 'border-neutral-200/50');
                 }
             }
         });
